@@ -3,9 +3,9 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
-contract AmpereHourV1 is OwnableUpgradeable, ERC20Upgradeable {
+contract AmpereHourV0 is OwnableUpgradeable, ERC20Upgradeable {
 
-    bool public isTransferable;
+    bool isTransferable;
 
     function initialize() initializer public {
         __Ownable_init();
@@ -25,7 +25,7 @@ contract AmpereHourV1 is OwnableUpgradeable, ERC20Upgradeable {
      * @dev mints new tokens to the specified address - only available to the owner
      */
     function mint(address account, uint256 amount) public onlyOwner {
-        _mint(account, amount);
+        // _mint(account, amount);
     }
 
     /**
@@ -33,7 +33,6 @@ contract AmpereHourV1 is OwnableUpgradeable, ERC20Upgradeable {
      */
     function transfer(address recipient, uint256 amount) public override onlyTransfeable returns (bool) {
         _transfer(_msgSender(), recipient, amount);
-        return true;
     }
 
     /**
