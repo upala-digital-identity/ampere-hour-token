@@ -8,7 +8,7 @@ async function main() {
   // const frame = ethProvider('frame') // Connect to Frame
 
   // // Use `getDeployTransaction` instead of `deploy` to return deployment data
-  // const AmpereHourV1 = await ethers.getContractFactory("AmpereHourV0");
+  // const AmpereHourV1 = await ethers.getContractFactory("AmpereHourV1");
   // const tx = await AmpereHourV1.getDeployTransaction()
  
   // // Set `tx.from` to current Frame account
@@ -18,8 +18,8 @@ async function main() {
   // await frame.request({ method: 'eth_sendTransaction', params: [tx] })
 
 
-  const AmpereHourV1 = await ethers.getContractFactory("AmpereHourV0");
-  console.log("Deploying AmpereHourV0...");
+  const AmpereHourV1 = await ethers.getContractFactory("AmpereHourV1");
+  console.log("Deploying AmpereHourV1...");
   const ah = await upgrades.deployProxy(AmpereHourV1);
 
   await ah.deployed();

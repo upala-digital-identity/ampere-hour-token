@@ -5,19 +5,19 @@ import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 
 contract AmpereHourV1 is OwnableUpgradeable, ERC20Upgradeable {
 
-    bool public isTransferable;
+    bool public transfersAllowed;
 
     function initialize() initializer public {
         __Ownable_init();
         __ERC20_init_unchained("AmpereHour", "Ah");
-        isTransferable = false;
+        transfersAllowed = false;
     }
 
     /**
      * @dev throws if token transfers are not allowed yet by the owner
      */
-    modifier onlyTransfeable() {
-        require(isTransferable == true, "Transfers not allowed yet");
+    modifier onlyTransferable() {
+        require(transfersAllowed == true, "Transfers not allowed yet");
         _;
     }
 
@@ -31,15 +31,15 @@ contract AmpereHourV1 is OwnableUpgradeable, ERC20Upgradeable {
     /**
      * @dev standard transfer function, but switched off untill transfers are allowed
      */
-    function transfer(address recipient, uint256 amount) public override onlyTransfeable returns (bool) {
-        _transfer(_msgSender(), recipient, amount);
-        return true;
+    function transfer(address recipient, uint256 amount) public override onlyTransferable returns (bool) {
+        super._transfer(_msgSender(), recipient, amount);
+        // return true;
     }
 
     /**
      * @dev allow token transfers - only available to the owner
      */
-    function adminEnableTransfers(bool allowTransfers) public onlyOwner {
-        isTransferable = allowTransfers;
+    function adminAllowTransfers(bool allowTransfers) public onlyOwner {
+        transfersAllowed = allowTransfers;
     }
 }
