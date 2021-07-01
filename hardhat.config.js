@@ -35,6 +35,23 @@ module.exports = {
       },
       timeout: 200000,
     },
+    mumbai: {
+      network_id: 80001,
+      url: `https://rpc-mumbai.matic.today`,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+      accounts: {
+        mnemonic: secrets.mnemonic
+      },
+    },
+    xdai: {
+      url: "https://rpc.xdaichain.com/",
+      accounts: {
+        mnemonic: secrets.mnemonic
+      },
+      timeout: 200000,
+    },
   },
   mocha: {
     timeout: 200000
